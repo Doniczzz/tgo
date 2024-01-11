@@ -10,11 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
 Future initializeCamera() async {
-  final cameraDescription = CameraDescription(
-    lensDirection: CameraLensDirection.front,
-    name: 'Reconocimiento Facial',
-    sensorOrientation: 0,
-  );
+  List<CameraDescription> cameras = await availableCameras();
+
+  final cameraDescription = cameras[1];
 
   final controller =
       CameraController(cameraDescription, ResolutionPreset.medium);
