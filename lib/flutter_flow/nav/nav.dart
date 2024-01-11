@@ -116,6 +116,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Auth3',
           path: '/auth3',
           builder: (context, params) => const Auth3Widget(),
+        ),
+        FFRoute(
+          name: 'cameraScreen',
+          path: '/cameraScreen',
+          builder: (context, params) => const CameraScreenWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

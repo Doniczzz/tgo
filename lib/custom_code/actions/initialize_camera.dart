@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 
 import 'package:camera/camera.dart';
 
+CameraImage? frame;
+bool isBusy = false;
+
 Future initializeCamera() async {
   List<CameraDescription> cameras = await availableCameras();
 
@@ -20,6 +23,7 @@ Future initializeCamera() async {
   await controller.initialize().then((_) {
     controller.startImageStream(
       (image) {
+        frame = image;
         print('camara encendida: ${image.width}');
       },
     );
