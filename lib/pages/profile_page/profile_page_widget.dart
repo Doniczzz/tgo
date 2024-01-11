@@ -92,34 +92,33 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               const Spacer(),
-                              Expanded(
-                                flex: 3,
-                                child: Material(
-                                  color: Colors.transparent,
-                                  elevation: 4.0,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
+                              Material(
+                                color: Colors.transparent,
+                                elevation: 4.0,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(0.0),
+                                    bottomRight: Radius.circular(0.0),
+                                    topLeft: Radius.circular(25.0),
+                                    topRight: Radius.circular(25.0),
+                                  ),
+                                ),
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: const BorderRadius.only(
                                       bottomLeft: Radius.circular(0.0),
                                       bottomRight: Radius.circular(0.0),
                                       topLeft: Radius.circular(25.0),
                                       topRight: Radius.circular(25.0),
                                     ),
                                   ),
-                                  child: Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      borderRadius: const BorderRadius.only(
-                                        bottomLeft: Radius.circular(0.0),
-                                        bottomRight: Radius.circular(0.0),
-                                        topLeft: Radius.circular(25.0),
-                                        topRight: Radius.circular(25.0),
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 60.0, 12.0, 12.0),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 60.0, 12.0, 12.0),
+                                    child: SingleChildScrollView(
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -347,63 +346,47 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                               ),
                                             ],
                                           ),
-                                          Expanded(
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Expanded(
-                                                  child: FFButtonWidget(
-                                                    onPressed: () async {
-                                                      context.pushNamed(
-                                                          'HomePage');
-                                                    },
-                                                    text: 'Finalizar Guardia',
-                                                    options: FFButtonOptions(
-                                                      height: 40.0,
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  24.0,
-                                                                  0.0,
-                                                                  24.0,
-                                                                  0.0),
-                                                      iconPadding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Inter',
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                      elevation: 3.0,
-                                                      borderSide: const BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              FFButtonWidget(
+                                                onPressed: () async {
+                                                  context.pushNamed('HomePage');
+                                                },
+                                                text: 'Finalizar Guardia',
+                                                options: FFButtonOptions(
+                                                  height: 40.0,
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          24.0, 0.0, 24.0, 0.0),
+                                                  iconPadding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
+                                                  textStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            color: Colors.white,
+                                                          ),
+                                                  elevation: 3.0,
+                                                  borderSide: const BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1.0,
                                                   ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         ].divide(const SizedBox(height: 15.0)),
                                       ),
@@ -414,7 +397,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             ],
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, -1.0),
+                            alignment: const AlignmentDirectional(0.0, -0.88),
                             child: Container(
                               width: 200.0,
                               height: 200.0,

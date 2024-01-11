@@ -87,17 +87,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     decoration: const BoxDecoration(),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        await Future.delayed(
-                            const Duration(milliseconds: 2000));
-
-                        context.pushNamed(
-                          'stream_page',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.scale,
-                              alignment: Alignment.bottomCenter,
-                            ),
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: const Text('Hola'),
+                              content: const Text('TEST'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: const Text('Ok'),
+                                ),
+                              ],
+                            );
                           },
                         );
                       },

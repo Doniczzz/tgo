@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "569468819036",
+    "project_id": "tgo-acudir-ur1vsf",
+    "storage_bucket": "tgo-acudir-ur1vsf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569468819036:android:532052ceaa4d5c36ed3899",
+        "android_client_info": {
+          "package_name": "net.acudir.tgo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-H0QQLJD8_U8avgKNqFokJ2ZU8wsgBW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
