@@ -7,8 +7,6 @@ class FaceRecognitionTestModel
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Custom Action - chooseImage] action in Button widget.
-  String? imagePath;
 
   /// Initialization and disposal methods.
 

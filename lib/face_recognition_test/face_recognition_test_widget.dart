@@ -137,12 +137,7 @@ class _FaceRecognitionTestWidgetState extends State<FaceRecognitionTestWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          _model.imagePath = await actions.chooseImage();
-                          await actions.doFaceDetection(
-                            _model.imagePath!,
-                          );
-
-                          setState(() {});
+                          await actions.initializeCamera();
                         },
                         text: 'Registro de cara',
                         options: FFButtonOptions(
