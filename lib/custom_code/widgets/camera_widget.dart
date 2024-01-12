@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// import 'package:tgo_acudir/flutter_flow/flutter_flow_icon_button.dart';
-import '../../flutter_flow/flutter_flow_icon_button.dart';
+import 'package:tgo_acudir/flutter_flow/flutter_flow_icon_button.dart';
+
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:image/image.dart' as img;
