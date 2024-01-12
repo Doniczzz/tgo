@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:tgo_acudir/flutter_flow/flutter_flow_icon_button.dart';
+
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:image/image.dart' as img;
@@ -41,7 +43,10 @@ class _CameraWidgetState extends State<CameraWidget> {
       if (!mounted) {
         return;
       }
-      controller.startImageStream((image) => {});
+      controller.startImageStream((image) => {
+            if (!isBusy)
+              {isBusy = true, frame = image, doFaceDetectionOnFrame()}
+          });
     });
   }
 
@@ -54,13 +59,26 @@ class _CameraWidgetState extends State<CameraWidget> {
     //TODO initialize face recognizer
 
     //TODO initialize camera footage
-    // initializeCamera();
+    initializeCamera();
   }
 
   @override
   void dispose() {
     controller?.dispose();
     super.dispose();
+  }
+
+  CameraImage? frame;
+  doFaceDetectionOnFrame() async {
+    //TODO convert frame into InputImage format
+
+    //TODO pass InputImage to face detection model and detect faces
+
+    //TODO perform face recognition on detected faces
+
+    setState(() {
+      isBusy = false;
+    });
   }
 
   @override
@@ -95,55 +113,82 @@ class _CameraWidgetState extends State<CameraWidget> {
       //       height: size.height,
       //       child: buildResult()),
       // );
-    }
-    stackChildren.add(Positioned(
-      top: size.height - 140,
-      left: 0,
-      width: size.width,
-      height: 80,
-      child: Card(
-        margin: const EdgeInsets.only(left: 20, right: 20),
-        color: Colors.blue,
-        child: Center(
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+      stackChildren.add(
+        Align(
+          alignment: AlignmentDirectional(0, 1),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
+            child: Container(
+              width: double.infinity,
+              height: 86,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(0),
+                  bottomRight: Radius.circular(0),
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(18),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.cached,
+                    FlutterFlowIconButton(
+                      borderRadius: 90,
+                      borderWidth: 1,
+                      buttonSize: 50,
+                      fillColor: Color(0xAC747474),
+                      icon: Icon(
+                        Icons.cameraswitch_outlined,
                         color: Colors.white,
+                        size: 30,
                       ),
-                      iconSize: 40,
-                      color: Colors.black,
                       onPressed: () {
-                        // _toggleCameraDirection();
+                        print('IconButton pressed ...');
                       },
                     ),
-                    Container(
-                      width: 30,
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.face_retouching_natural,
+                    FlutterFlowIconButton(
+                      borderColor: Colors.transparent,
+                      borderRadius: 90,
+                      borderWidth: 1,
+                      buttonSize: 50,
+                      fillColor: Color(0xAC747474),
+                      icon: Icon(
+                        Icons.camera,
                         color: Colors.white,
+                        size: 30,
                       ),
-                      iconSize: 40,
-                      color: Colors.black,
-                      onPressed: () {},
-                    )
+                      onPressed: () {
+                        print('IconButton pressed ...');
+                      },
+                    ),
+                    FlutterFlowIconButton(
+                      borderColor: Colors.transparent,
+                      borderRadius: 90,
+                      borderWidth: 1,
+                      buttonSize: 50,
+                      fillColor: Color(0xAC747474),
+                      icon: Icon(
+                        Icons.exit_to_app,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      onPressed: () async {
+                        context.safePop();
+                      },
+                    ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
-      ),
-    ));
+      );
+    }
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,

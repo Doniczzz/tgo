@@ -1,29 +1,29 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'face_recognition_test_model.dart';
-export 'face_recognition_test_model.dart';
+import 'face_recognition_screen_model.dart';
+export 'face_recognition_screen_model.dart';
 
-class FaceRecognitionTestWidget extends StatefulWidget {
-  const FaceRecognitionTestWidget({super.key});
+class FaceRecognitionScreenWidget extends StatefulWidget {
+  const FaceRecognitionScreenWidget({super.key});
 
   @override
-  _FaceRecognitionTestWidgetState createState() =>
-      _FaceRecognitionTestWidgetState();
+  _FaceRecognitionScreenWidgetState createState() =>
+      _FaceRecognitionScreenWidgetState();
 }
 
-class _FaceRecognitionTestWidgetState extends State<FaceRecognitionTestWidget> {
-  late FaceRecognitionTestModel _model;
+class _FaceRecognitionScreenWidgetState
+    extends State<FaceRecognitionScreenWidget> {
+  late FaceRecognitionScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => FaceRecognitionTestModel());
+    _model = createModel(context, () => FaceRecognitionScreenModel());
   }
 
   @override
@@ -68,7 +68,7 @@ class _FaceRecognitionTestWidgetState extends State<FaceRecognitionTestWidget> {
                   await authManager.signOut();
                   GoRouter.of(context).clearRedirectLocation();
 
-                  context.goNamedAuth('Auth3', context.mounted);
+                  context.goNamedAuth('null', context.mounted);
                 },
                 child: Text(
                   'Reconocimiento Facial',
@@ -136,7 +136,7 @@ class _FaceRecognitionTestWidgetState extends State<FaceRecognitionTestWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('cameraScreen');
+                          context.pushNamed('camera_screen');
                         },
                         text: 'Registro de cara',
                         options: FFButtonOptions(
