@@ -2,14 +2,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'face_cropped_model.dart';
 export 'face_cropped_model.dart';
 
 class FaceCroppedWidget extends StatefulWidget {
   const FaceCroppedWidget({
-    super.key,
+    Key? key,
     required this.userFace,
-  });
+  }) : super(key: key);
 
   final FFUploadedFile? userFace;
 
@@ -49,7 +51,7 @@ class _FaceCroppedWidgetState extends State<FaceCroppedWidget> {
       height: 370.0,
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
             blurRadius: 3.0,
             color: Color(0x33000000),
@@ -58,19 +60,19 @@ class _FaceCroppedWidgetState extends State<FaceCroppedWidget> {
         ],
         borderRadius: BorderRadius.circular(12.0),
         border: Border.all(
-          color: const Color(0xFFE0E3E7),
+          color: Color(0xFFE0E3E7),
         ),
       ),
-      alignment: const AlignmentDirectional(0.0, 0.0),
+      alignment: AlignmentDirectional(0.0, 0.0),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+        padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -86,19 +88,19 @@ class _FaceCroppedWidgetState extends State<FaceCroppedWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                     child: Text(
                       'Guardar en base de datos',
                       style: FlutterFlowTheme.of(context).bodyLarge.override(
                             fontFamily: 'Plus Jakarta Sans',
-                            color: const Color(0xFF14181B),
+                            color: Color(0xFF14181B),
                             fontSize: 16.0,
                             fontWeight: FontWeight.w500,
                           ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                     child: TextFormField(
                       controller: _model.textController,
                       focusNode: _model.textFieldFocusNode,
@@ -148,7 +150,7 @@ class _FaceCroppedWidgetState extends State<FaceCroppedWidget> {
             Container(
               width: double.infinity,
               height: 44.0,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Color(0xFF4B39EF),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(12.0),
@@ -157,7 +159,7 @@ class _FaceCroppedWidgetState extends State<FaceCroppedWidget> {
                   topRight: Radius.circular(0.0),
                 ),
               ),
-              alignment: const AlignmentDirectional(0.0, 0.0),
+              alignment: AlignmentDirectional(0.0, 0.0),
               child: Text(
                 'Guardar',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(

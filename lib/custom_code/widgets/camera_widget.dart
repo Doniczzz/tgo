@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:tgo_acudir/flutter_flow/flutter_flow_icon_button.dart';
-
+// import 'package:tgo_acudir/flutter_flow/flutter_flow_icon_button.dart';
+import '../../flutter_flow/flutter_flow_icon_button.dart';
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:image/image.dart' as img;
@@ -50,6 +50,21 @@ class _CameraWidgetState extends State<CameraWidget> {
     });
   }
 
+  void toggleCameraDirection() async {
+    if (camDirec == CameraLensDirection.back) {
+      camDirec = CameraLensDirection.front;
+      description = cameras[1];
+    } else {
+      camDirec = CameraLensDirection.back;
+      description = cameras[0];
+    }
+    await controller.stopImageStream();
+    setState(() {
+      controller;
+    });
+    initializeCamera();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -76,9 +91,11 @@ class _CameraWidgetState extends State<CameraWidget> {
 
     //TODO perform face recognition on detected faces
 
-    setState(() {
-      isBusy = false;
-    });
+    if (mounted) {
+      setState(() {
+        isBusy = false;
+      });
+    }
   }
 
   @override

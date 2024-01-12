@@ -4,11 +4,13 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'profile_page_model.dart';
 export 'profile_page_model.dart';
 
 class ProfilePageWidget extends StatefulWidget {
-  const ProfilePageWidget({super.key});
+  const ProfilePageWidget({Key? key}) : super(key: key);
 
   @override
   _ProfilePageWidgetState createState() => _ProfilePageWidgetState();
@@ -49,7 +51,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF3F69D3), Color(0xFF163A95)],
             stops: [0.0, 1.0],
@@ -58,7 +60,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
+          padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -70,7 +72,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                     borderRadius: 20.0,
                     borderWidth: 1.0,
                     buttonSize: 50.0,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.menu,
                       color: Colors.white,
                       size: 35.0,
@@ -91,11 +93,11 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              const Spacer(),
+                              Spacer(),
                               Material(
                                 color: Colors.transparent,
                                 elevation: 4.0,
-                                shape: const RoundedRectangleBorder(
+                                shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(0.0),
                                     bottomRight: Radius.circular(0.0),
@@ -108,7 +110,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
-                                    borderRadius: const BorderRadius.only(
+                                    borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(0.0),
                                       bottomRight: Radius.circular(0.0),
                                       topLeft: Radius.circular(25.0),
@@ -116,7 +118,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         12.0, 60.0, 12.0, 12.0),
                                     child: SingleChildScrollView(
                                       child: Column(
@@ -128,9 +130,9 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                         children: [
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 0.0, 30.0),
                                               child: Text(
@@ -173,7 +175,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                     .headlineSmall
                                                     .override(
                                                       fontFamily: 'Readex Pro',
-                                                      color: const Color(0xFF55575E),
+                                                      color: Color(0xFF55575E),
                                                       fontSize: 25.0,
                                                       fontWeight:
                                                           FontWeight.w300,
@@ -206,7 +208,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                     .headlineSmall
                                                     .override(
                                                       fontFamily: 'Readex Pro',
-                                                      color: const Color(0xFF55575E),
+                                                      color: Color(0xFF55575E),
                                                       fontSize: 25.0,
                                                       fontWeight:
                                                           FontWeight.w300,
@@ -239,7 +241,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                     .headlineSmall
                                                     .override(
                                                       fontFamily: 'Readex Pro',
-                                                      color: const Color(0xFF55575E),
+                                                      color: Color(0xFF55575E),
                                                       fontSize: 25.0,
                                                       fontWeight:
                                                           FontWeight.w300,
@@ -272,7 +274,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                     .headlineSmall
                                                     .override(
                                                       fontFamily: 'Readex Pro',
-                                                      color: const Color(0xFF55575E),
+                                                      color: Color(0xFF55575E),
                                                       fontSize: 25.0,
                                                       fontWeight:
                                                           FontWeight.w300,
@@ -305,7 +307,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                     .headlineSmall
                                                     .override(
                                                       fontFamily: 'Readex Pro',
-                                                      color: const Color(0xFF55575E),
+                                                      color: Color(0xFF55575E),
                                                       fontSize: 25.0,
                                                       fontWeight:
                                                           FontWeight.w300,
@@ -338,7 +340,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                     .headlineSmall
                                                     .override(
                                                       fontFamily: 'Readex Pro',
-                                                      color: const Color(0xFF55575E),
+                                                      color: Color(0xFF55575E),
                                                       fontSize: 25.0,
                                                       fontWeight:
                                                           FontWeight.w300,
@@ -358,11 +360,11 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                 text: 'Finalizar Guardia',
                                                 options: FFButtonOptions(
                                                   height: 40.0,
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           24.0, 0.0, 24.0, 0.0),
                                                   iconPadding:
-                                                      const EdgeInsetsDirectional
+                                                      EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: FlutterFlowTheme.of(
@@ -377,7 +379,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                             color: Colors.white,
                                                           ),
                                                   elevation: 3.0,
-                                                  borderSide: const BorderSide(
+                                                  borderSide: BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
@@ -388,7 +390,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                               ),
                                             ],
                                           ),
-                                        ].divide(const SizedBox(height: 15.0)),
+                                        ].divide(SizedBox(height: 15.0)),
                                       ),
                                     ),
                                   ),
@@ -397,12 +399,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             ],
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, -0.88),
+                            alignment: AlignmentDirectional(0.0, -0.88),
                             child: Container(
                               width: 200.0,
                               height: 200.0,
                               clipBehavior: Clip.antiAlias,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: Image.asset(

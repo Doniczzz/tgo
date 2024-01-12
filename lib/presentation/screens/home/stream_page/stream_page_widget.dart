@@ -1,13 +1,16 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'stream_page_model.dart';
 export 'stream_page_model.dart';
 
 class StreamPageWidget extends StatefulWidget {
-  const StreamPageWidget({super.key});
+  const StreamPageWidget({Key? key}) : super(key: key);
 
   @override
   _StreamPageWidgetState createState() => _StreamPageWidgetState();
@@ -30,7 +33,7 @@ class _StreamPageWidgetState extends State<StreamPageWidget> {
       context.pushNamed(
         'loading_page',
         extra: <String, dynamic>{
-          kTransitionInfoKey: const TransitionInfo(
+          kTransitionInfoKey: TransitionInfo(
             hasTransition: true,
             transitionType: PageTransitionType.fade,
             duration: Duration(milliseconds: 600),

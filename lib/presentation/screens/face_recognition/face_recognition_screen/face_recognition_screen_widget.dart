@@ -3,11 +3,13 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'face_recognition_screen_model.dart';
 export 'face_recognition_screen_model.dart';
 
 class FaceRecognitionScreenWidget extends StatefulWidget {
-  const FaceRecognitionScreenWidget({super.key});
+  const FaceRecognitionScreenWidget({Key? key}) : super(key: key);
 
   @override
   _FaceRecognitionScreenWidgetState createState() =>
@@ -58,39 +60,26 @@ class _FaceRecognitionScreenWidgetState
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  GoRouter.of(context).prepareAuthEvent();
-                  await authManager.signOut();
-                  GoRouter.of(context).clearRedirectLocation();
-
-                  context.goNamedAuth('null', context.mounted);
-                },
-                child: Text(
-                  'Reconocimiento Facial',
-                  style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Readex Pro',
-                        color: Colors.white,
-                        fontSize: 22.0,
-                      ),
-                ),
+              Text(
+                'Reconocimiento Facial',
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily: 'Readex Pro',
+                      color: Colors.white,
+                      fontSize: 22.0,
+                    ),
               ),
             ],
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 2.0,
         ),
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: const AlignmentDirectional(0.0, 0.0),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -116,9 +105,9 @@ class _FaceRecognitionScreenWidgetState
                         text: 'Iniciar Reconocimiento Facial',
                         options: FFButtonOptions(
                           height: 40.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
@@ -127,7 +116,7 @@ class _FaceRecognitionScreenWidgetState
                                     color: Colors.white,
                                   ),
                           elevation: 3.0,
-                          borderSide: const BorderSide(
+                          borderSide: BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -141,9 +130,9 @@ class _FaceRecognitionScreenWidgetState
                         text: 'Registro de cara',
                         options: FFButtonOptions(
                           height: 40.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
@@ -152,14 +141,14 @@ class _FaceRecognitionScreenWidgetState
                                     color: Colors.white,
                                   ),
                           elevation: 3.0,
-                          borderSide: const BorderSide(
+                          borderSide: BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                    ].divide(const SizedBox(height: 25.0)),
+                    ].divide(SizedBox(height: 25.0)),
                   ),
                 ],
               ),

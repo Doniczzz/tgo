@@ -1,15 +1,18 @@
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'success_page_model.dart';
 export 'success_page_model.dart';
 
 class SuccessPageWidget extends StatefulWidget {
-  const SuccessPageWidget({super.key});
+  const SuccessPageWidget({Key? key}) : super(key: key);
 
   @override
   _SuccessPageWidgetState createState() => _SuccessPageWidgetState();
@@ -97,7 +100,7 @@ class _SuccessPageWidgetState extends State<SuccessPageWidget>
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF3F69D3), Color(0xFF163A95)],
             stops: [0.0, 1.0],
@@ -108,7 +111,7 @@ class _SuccessPageWidgetState extends State<SuccessPageWidget>
         child: Stack(
           children: [
             Align(
-              alignment: const AlignmentDirectional(0.0, 0.0),
+              alignment: AlignmentDirectional(0.0, 0.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.asset(
@@ -118,7 +121,7 @@ class _SuccessPageWidgetState extends State<SuccessPageWidget>
               ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation1']!),
             ),
             Align(
-              alignment: const AlignmentDirectional(0.0, 0.0),
+              alignment: AlignmentDirectional(0.0, 0.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.asset(
@@ -130,7 +133,7 @@ class _SuccessPageWidgetState extends State<SuccessPageWidget>
               ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
             ),
             Align(
-              alignment: const AlignmentDirectional(0.01, 0.4),
+              alignment: AlignmentDirectional(0.01, 0.4),
               child: Text(
                 'Verificación exitosa',
                 style: FlutterFlowTheme.of(context).titleMedium.override(

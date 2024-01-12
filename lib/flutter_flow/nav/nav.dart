@@ -1,10 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
 
 import '/index.dart';
+import '/main.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -29,47 +37,47 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const FaceRecognitionScreenWidget(),
+      errorBuilder: (context, state) => FaceRecognitionScreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const FaceRecognitionScreenWidget(),
+          builder: (context, _) => FaceRecognitionScreenWidget(),
         ),
         FFRoute(
           name: 'HomePage',
           path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
+          builder: (context, params) => HomePageWidget(),
         ),
         FFRoute(
           name: 'stream_page',
           path: '/streamPage',
-          builder: (context, params) => const StreamPageWidget(),
+          builder: (context, params) => StreamPageWidget(),
         ),
         FFRoute(
           name: 'loading_page',
           path: '/loadingPage',
-          builder: (context, params) => const LoadingPageWidget(),
+          builder: (context, params) => LoadingPageWidget(),
         ),
         FFRoute(
           name: 'success_page',
           path: '/successPage',
-          builder: (context, params) => const SuccessPageWidget(),
+          builder: (context, params) => SuccessPageWidget(),
         ),
         FFRoute(
           name: 'profile_page',
           path: '/profilePage',
-          builder: (context, params) => const ProfilePageWidget(),
+          builder: (context, params) => ProfilePageWidget(),
         ),
         FFRoute(
           name: 'face_recognition_screen',
           path: '/faceRecognitionScreen',
-          builder: (context, params) => const FaceRecognitionScreenWidget(),
+          builder: (context, params) => FaceRecognitionScreenWidget(),
         ),
         FFRoute(
           name: 'camera_screen',
           path: '/cameraScreen',
-          builder: (context, params) => const CameraScreenWidget(),
+          builder: (context, params) => CameraScreenWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -230,7 +238,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

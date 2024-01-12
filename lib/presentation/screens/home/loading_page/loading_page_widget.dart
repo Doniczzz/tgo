@@ -1,14 +1,17 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'loading_page_model.dart';
 export 'loading_page_model.dart';
 
 class LoadingPageWidget extends StatefulWidget {
-  const LoadingPageWidget({super.key});
+  const LoadingPageWidget({Key? key}) : super(key: key);
 
   @override
   _LoadingPageWidgetState createState() => _LoadingPageWidgetState();
@@ -31,7 +34,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
       context.pushNamed(
         'success_page',
         extra: <String, dynamic>{
-          kTransitionInfoKey: const TransitionInfo(
+          kTransitionInfoKey: TransitionInfo(
             hasTransition: true,
             transitionType: PageTransitionType.fade,
             duration: Duration(milliseconds: 0),
@@ -65,7 +68,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF3F69D3), Color(0xFF163A95)],
             stops: [0.0, 1.0],
@@ -78,7 +81,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Align(
-              alignment: const AlignmentDirectional(0.0, 0.0),
+              alignment: AlignmentDirectional(0.0, 0.0),
               child: Lottie.asset(
                 'assets/lottie_animations/Animation_-_1703023163966.json',
                 width: 300.0,
@@ -102,7 +105,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
                     fontStyle: FontStyle.italic,
                   ),
             ),
-          ].divide(const SizedBox(height: 50.0)),
+          ].divide(SizedBox(height: 50.0)),
         ),
       ),
     );
