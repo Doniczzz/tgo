@@ -124,8 +124,8 @@ class _FaceRecognitionScreenWidgetState
                         ),
                       ),
                       FFButtonWidget(
-                        onPressed: () async {
-                          context.pushNamed('camera_screen');
+                        onPressed: () {
+                          print('Button pressed ...');
                         },
                         text: 'Registro de cara',
                         options: FFButtonOptions(

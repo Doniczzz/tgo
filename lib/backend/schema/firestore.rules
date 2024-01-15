@@ -1,14 +1,14 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /images/{document} {
+    match /users/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if true;
       allow delete: if true;
     }
 
-    match /users/{document} {
+    match /user_faces/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if true;

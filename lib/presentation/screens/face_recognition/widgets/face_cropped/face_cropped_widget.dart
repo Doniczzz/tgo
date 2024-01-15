@@ -13,7 +13,7 @@ class FaceCroppedWidget extends StatefulWidget {
     required this.userFace,
   }) : super(key: key);
 
-  final FFUploadedFile? userFace;
+  final String? userFace;
 
   @override
   _FaceCroppedWidgetState createState() => _FaceCroppedWidgetState();
@@ -80,8 +80,8 @@ class _FaceCroppedWidgetState extends State<FaceCroppedWidget> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
-                    child: Image.memory(
-                      widget.userFace?.bytes ?? Uint8List.fromList([]),
+                    child: Image.network(
+                      widget.userFace!,
                       width: double.infinity,
                       height: 200.0,
                       fit: BoxFit.cover,
