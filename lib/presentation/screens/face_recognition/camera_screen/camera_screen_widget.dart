@@ -1,3 +1,5 @@
+import 'package:tgo_acudir/presentation/screens/face_recognition/widgets/camera_widget/camera_widget.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -47,6 +49,7 @@ class _CameraScreenWidgetState extends State<CameraScreenWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      body: const Center(child: CameraWidget()),
     );
   }
 }
