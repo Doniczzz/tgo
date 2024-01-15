@@ -34,3 +34,6 @@ Pods/
 **/release
 !**/default.profraw
 flutter_export_environment.sh
+
+# Herramientas de Dart
+.dart_tool/
