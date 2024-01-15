@@ -13,3 +13,5 @@ export '/presentation/screens/face_recognition/face_recognition_screen/face_reco
     show FaceRecognitionScreenWidget;
 export '/presentation/screens/face_recognition/camera_screen/camera_screen_widget.dart'
     show CameraScreenWidget;
+export '/presentation/screens/face_recognition/recognition_screen/recognition_screen_widget.dart'
+    show RecognitionScreenWidget;

@@ -62,6 +62,8 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
       );
     }
 
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

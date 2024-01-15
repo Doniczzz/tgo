@@ -5,25 +5,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'camera_screen_model.dart';
-export 'camera_screen_model.dart';
+import 'recognition_screen_model.dart';
+export 'recognition_screen_model.dart';
 
-class CameraScreenWidget extends StatefulWidget {
-  const CameraScreenWidget({Key? key}) : super(key: key);
+class RecognitionScreenWidget extends StatefulWidget {
+  const RecognitionScreenWidget({Key? key}) : super(key: key);
 
   @override
-  _CameraScreenWidgetState createState() => _CameraScreenWidgetState();
+  _RecognitionScreenWidgetState createState() =>
+      _RecognitionScreenWidgetState();
 }
 
-class _CameraScreenWidgetState extends State<CameraScreenWidget> {
-  late CameraScreenModel _model;
+class _RecognitionScreenWidgetState extends State<RecognitionScreenWidget> {
+  late RecognitionScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CameraScreenModel());
+    _model = createModel(context, () => RecognitionScreenModel());
   }
 
   @override
@@ -46,9 +47,14 @@ class _CameraScreenWidgetState extends State<CameraScreenWidget> {
 
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+    return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      ),
     );
   }
 }

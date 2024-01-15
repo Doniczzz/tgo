@@ -45,6 +45,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
       );
     }
 
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

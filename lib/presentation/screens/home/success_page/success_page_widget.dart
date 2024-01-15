@@ -94,6 +94,8 @@ class _SuccessPageWidgetState extends State<SuccessPageWidget>
       );
     }
 
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

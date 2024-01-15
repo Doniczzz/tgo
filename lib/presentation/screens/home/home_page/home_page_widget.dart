@@ -44,6 +44,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       );
     }
 
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -88,23 +90,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     width: double.infinity,
                     decoration: BoxDecoration(),
                     child: FFButtonWidget(
-                      onPressed: () async {
-                        await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: Text('Hola'),
-                              content: Text('TEST'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: Text('Ok'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                      onPressed: () {
+                        print('Button pressed ...');
                       },
                       text: 'Iniciar',
                       options: FFButtonOptions(
