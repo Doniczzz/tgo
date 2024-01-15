@@ -1,0 +1,36 @@
+# Archivos y directorios creados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos y directorios creados por el IDE
+.idea/
+.vscode/
+
+# Directorio de compilación de Flutter
+build/
+
+# Archivos de Dart
+*.dart.js
+*.dart.js.deps
+*.dart.js.map
+*.info.json
+*.dart2js_info.json
+*.jshints
+.packages
+.pub/
+
+# Archivos generados por pub
+/lib/generated_plugin_registrant.dart
+
+# Archivos generados por Flutter para iOS y Android
+ios/Runner.xcworkspace/xcuserdata/
+ios/Runner.xcworkspace/xcshareddata/
+**/xcuserdata/
+*.podspec.lock
+Podfile.lock
+Pods/
+**/.symlinks/
+**/profile
+**/release
+!**/default.profraw
+flutter_export_environment.sh
