@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:tgo_acudir/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:tgo_acudir/flutter_flow/flutter_flow_util.dart';
@@ -26,10 +27,6 @@ class _CameraWidgetState extends State<CameraWidget> {
   late CameraDescription description = cameras[1];
   CameraLensDirection camDirec = CameraLensDirection.front;
 
-  bool smileDetected = false;
-  bool righEyeClose = false;
-  bool leftEyeClose = false;
-
   late FaceDetector faceDetector;
   late Recognizer recognizer;
 
@@ -38,12 +35,13 @@ class _CameraWidgetState extends State<CameraWidget> {
 
   img.Image? image;
 
-  @override
-  String get modelName => 'assets/tfmodels/mobile_face_net.tflite';
 
   initializeCamera() async {
     cameras = await availableCameras();
-    controller = CameraController(description, ResolutionPreset.medium);
+    controller = CameraController(
+      description,
+      ResolutionPreset.medium,
+    );
     await controller.initialize().then((_) {
       if (!mounted) {
         return;
@@ -155,7 +153,7 @@ class _CameraWidgetState extends State<CameraWidget> {
       //             TextButton(
       //               child: const Text('Register'),
       //               onPressed: () async{
-                      // await recognizer.recognize(croppedFace, faceRect, true);
+      // await recognizer.recognize(croppedFace, faceRect, true);
       //                 // ignore: use_build_context_synchronously
       //                 context.pushReplacementNamed('face_recognition_screen');
       //                 // print(croppedFace.data);
@@ -217,6 +215,59 @@ class _CameraWidgetState extends State<CameraWidget> {
     return reshapedArray.reshape([1, height, width, channels]);
   }
 
+  // void notificationSnackbar(String title, String subTitle) {
+  //   showOverlayNotification(
+  //     key: flushKey,
+  //     (context) {
+  //       return Card(
+  //         color: Colors.green,
+  //         margin: const EdgeInsets.fromLTRB(12, 24, 12, 0),
+  //         child: Row(
+  //           crossAxisAlignment: CrossAxisAlignment.center,
+  //           children: [
+  //             const Padding(
+  //               padding: EdgeInsets.only(left: 10),
+  //               child: Icon(
+  //                 Icons.notifications_active,
+  //                 color: Colors.white,
+  //                 size: 32,
+  //               ),
+  //             ),
+  //             Expanded(
+  //               child: Padding(
+  //                 padding: const EdgeInsets.all(12.0),
+  //                 child: Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   children: [
+  //                     Text(
+  //                       title,
+  //                       textAlign: TextAlign.start,
+  //                       style: const TextStyle(
+  //                         fontSize: 15,
+  //                         fontWeight: FontWeight.bold,
+  //                         color: Colors.white,
+  //                       ),
+  //                     ),
+  //                     Text(
+  //                       subTitle,
+  //                       textAlign: TextAlign.start,
+  //                       style: const TextStyle(
+  //                         fontSize: 13,
+  //                         color: Colors.white,
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //     duration: const Duration(days: 1),
+  //   );
+  // }
+
   doFaceDetectionOnFrame() async {
     //TODO convert frame into InputImage format
 
@@ -225,13 +276,36 @@ class _CameraWidgetState extends State<CameraWidget> {
     //TODO pass InputImage to face detection model and detect faces
 
     List<Face> faces = await faceDetector.processImage(inputImage);
-    for (Face face in faces) {
-      if (face.smilingProbability! > 0.85) {
-        print('ESTAS SONRIENDO PAPURROOOOO');
-      } else {
-        print('ESTAS TRISTE :C');
-      }
-    }
+
+    // for (Face face in faces) {
+    //   switch (stage) {
+    //     case 0:
+    //       if (face.smilingProbability! > 0.85) {
+    //         stage = 1;
+    //         if (isSnackbarShowing) {
+    //           // ignore: use_build_context_synchronously
+    //           OverlaySupportEntry.of(context)!.dismiss();
+    //           isSnackbarShowing = false;
+    //         }
+    //       } else if (!isSnackbarShowing) {
+    //         isSnackbarShowing = true;
+    //         notificationSnackbar('Sonríe para la camara', 'Subtitulo');
+            
+    //       }
+    //       break;
+    //     case 1:
+    //       if (face.leftEyeOpenProbability! < 0.10 && face.rightEyeOpenProbability! > 0.80) {
+    //         // ignore: use_build_context_synchronously
+    //         OverlaySupportEntry.of(context)!.dismiss();
+    //       } else {
+    //         isSnackbarShowing = true;
+    //         notificationSnackbar('Cierra el ojo derecho', 'Subtitulo');
+    //       }
+    //       break;
+    //     default:
+    //   }
+    // }
+
     if (mounted) {
       setState(() {
         _scanResults = faces;
@@ -313,6 +387,7 @@ class _CameraWidgetState extends State<CameraWidget> {
   @override
   void dispose() {
     controller?.dispose();
+    // ScaffoldMessenger.of(context).hideCurrentSnackBar();
     super.dispose();
   }
 
