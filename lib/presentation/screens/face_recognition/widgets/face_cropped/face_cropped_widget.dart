@@ -163,7 +163,7 @@ class FaceCroppedWidgetState extends State<FaceCroppedWidget> {
               ),
               GestureDetector(
                 onTap: () async {
-                  await recognizer.recognize(widget.userFace, widget.faceRect, true);
+                  await recognizer.recognize(widget.userFace, widget.faceRect, true, _model.textController.text);
                 },
                 child: Container(
                   width: double.infinity,

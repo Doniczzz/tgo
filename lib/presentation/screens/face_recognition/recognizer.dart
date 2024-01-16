@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:image/image.dart' as img;
+import 'package:tgo_acudir/app_state.dart';
 import 'package:tgo_acudir/backend/backend.dart';
 import 'package:tgo_acudir/backend/schema/user_faces_record.dart';
 
@@ -54,7 +55,7 @@ class Recognizer {
     return reshapedArray.reshape([1, 112, 112, 3]);
   }
 
-  Future<void> recognize(img.Image image, Rect location, bool register) async {
+  Future<void> recognize(img.Image image, Rect location, bool register, String? name) async {
     //TODO crop face from image resize it and convert it to float array
     var input = imageToArray(image);
     print(input.shape.toString());
@@ -63,18 +64,14 @@ class Recognizer {
     List output = List.filled(1 * 192, 0).reshape([1, 192]);
 
     //TODO performs inference
-    final runs = DateTime.now().millisecondsSinceEpoch;
     interpreter.run(input, output);
-    final run = DateTime.now().millisecondsSinceEpoch - runs;
-    print('Time to run inference: $run ms$output');
 
     //TODO convert dynamic list to double list
     List<double> outputArray = output.first.cast<double>();
-    print(outputArray);
 
     (register)
         ? await UserFacesRecord.collection.doc().set(createUserFacesRecordData(
-              name: 'Gabriel',
+              name: name,
               embedding: outputArray.toString(),
             ))
         : findNearest(outputArray);
@@ -87,27 +84,33 @@ class Recognizer {
   }
 
   findNearest(List<double> emb) async {
-    Pair pair = Pair("Unknown", double.infinity);
-    final usersFaces = await queryUserFacesRecordOnce();
+    Pair pair = Pair("Unknown", -5);
+    final usersFaces = FFAppState().usersFaces.toList();
     for (var userFace in usersFaces) {
-      final String name = userFace.name;
-      List<double> knownEmb = List.castFrom(jsonDecode(userFace.embedding));
+      final usersFacesItem = await UserFacesRecord.getDocumentOnce(userFace);
+      final String name = usersFacesItem.name;
+      List<double> knownEmb = List.castFrom(jsonDecode(usersFacesItem.embedding));
       double distance = 0;
       for (int i = 0; i < emb.length; i++) {
         double diff = emb[i] - knownEmb[i];
         distance += diff * diff;
       }
       distance = sqrt(distance);
-      if (distance < pair.distance) {
+      // if (distance < pair.distance) {
+      //   pair.distance = distance;
+      //   pair.name = name;
+      // }
+      if (pair.distance == -5 || distance < pair.distance) {
         pair.distance = distance;
         pair.name = name;
       }
     }
-    if (pair.distance == double.infinity) {
-      print("Cara desconocida");
-    } else {
-      print("Nombre: ${pair.name}, Distancia: ${pair.distance}");
-    }
+    print('Nombre: ${pair.name}, Distancia: ${pair.distance}');
+    // if (pair.distance == double.infinity) {
+    //   print("Cara desconocida");
+    // } else {
+    //   print("Nombre: ${pair.name}, Distancia: ${pair.distance}");
+    // }
     // return pair;
   }
 
