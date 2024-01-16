@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 
 import '/index.dart';
 import '/main.dart';
@@ -78,6 +79,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'camera_screen',
           path: '/cameraScreen',
           builder: (context, params) => CameraScreenWidget(),
+        ),
+        FFRoute(
+          name: 'recognition_screen',
+          path: '/recognitionScreen',
+          builder: (context, params) => RecognitionScreenWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

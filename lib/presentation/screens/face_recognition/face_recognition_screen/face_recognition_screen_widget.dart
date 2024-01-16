@@ -1,6 +1,9 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,6 +48,8 @@ class _FaceRecognitionScreenWidgetState
         ),
       );
     }
+
+    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -99,8 +104,19 @@ class _FaceRecognitionScreenWidgetState
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
+                        onPressed: () async {
+                          _model.usersFacesQuery =
+                              await queryUserFacesRecordOnce();
+                          setState(() {
+                            FFAppState().usersFaces = _model.usersFacesQuery!
+                                .map((e) => e.reference)
+                                .toList()
+                                .cast<DocumentReference>();
+                          });
+
+                          context.pushNamed('recognition_screen');
+
+                          setState(() {});
                         },
                         text: 'Iniciar Reconocimiento Facial',
                         options: FFButtonOptions(
@@ -124,7 +140,7 @@ class _FaceRecognitionScreenWidgetState
                         ),
                       ),
                       FFButtonWidget(
-                        onPressed: () {
+                        onPressed: () async {
                           context.pushNamed('camera_screen');
                         },
                         text: 'Registro de cara',
