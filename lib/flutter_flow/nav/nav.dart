@@ -20,6 +20,8 @@ export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
 
+final globalKey = GlobalKey<NavigatorState>();
+
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
 
@@ -34,8 +36,11 @@ class AppStateNotifier extends ChangeNotifier {
   }
 }
 
+
+
 GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
+      navigatorKey: globalKey,
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => FaceRecognitionScreenWidget(),

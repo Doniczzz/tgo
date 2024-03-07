@@ -31,6 +31,10 @@ class _RecognitionCameraWidgetState extends State<RecognitionCameraWidget> {
   bool isBusy = false;
   img.Image? image;
 
+  int stage = 0;
+  bool isSnackbarShowing = false;
+  bool warningSnackbarShowing = false;
+
   Widget buildResult() {
     if (_scanResults == null || controller == null || !controller.value.isInitialized) {
       return const Center(child: Text('Camara no inicializada'));
@@ -147,42 +151,76 @@ class _RecognitionCameraWidgetState extends State<RecognitionCameraWidget> {
 
     List<Face> faces = await faceDetector.processImage(inputImage);
 
-    performFaceRecognition(faces);
-
-    // for (Face face in faces) {
-    //   switch (stage) {
-    //     case 0:
-    //       if (face.smilingProbability! > 0.85) {
-    //         stage = 1;
-    //         if (isSnackbarShowing) {
-    //           // ignore: use_build_context_synchronously
-    //           OverlaySupportEntry.of(context)!.dismiss();
-    //           isSnackbarShowing = false;
-    //         }
-    //       } else if (!isSnackbarShowing) {
-    //         isSnackbarShowing = true;
-    //         notificationSnackbar('Sonríe para la camara', 'Subtitulo');
-
-    //       }
-    //       break;
-    //     case 1:
-    //       if (face.leftEyeOpenProbability! < 0.10 && face.rightEyeOpenProbability! > 0.80) {
-    //         // ignore: use_build_context_synchronously
-    //         OverlaySupportEntry.of(context)!.dismiss();
-    //       } else {
-    //         isSnackbarShowing = true;
-    //         notificationSnackbar('Cierra el ojo derecho', 'Subtitulo');
-    //       }
-    //       break;
-    //     default:
-    //   }
-    // }
+    if (faces.length == 1) {
+      for (Face face in faces) {
+        switch (stage) {
+          case 0:
+            if (face.smilingProbability! > 0.85) {
+              stage = 1;
+              if (isSnackbarShowing) {
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                isSnackbarShowing = false;
+              }
+            } else if (!isSnackbarShowing) {
+              isSnackbarShowing = true;
+              // ignore: use_build_context_synchronously
+              showSnackbar(context, 'Sonríe para la camara');
+            }
+            break;
+          case 1:
+            if (face.leftEyeOpenProbability! < 0.10 && face.rightEyeOpenProbability! > 0.80) {
+              stage = 2;
+              if (isSnackbarShowing) {
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                isSnackbarShowing = false;
+              }
+            } else if (!isSnackbarShowing) {
+              isSnackbarShowing = true;
+              // ignore: use_build_context_synchronously
+              showSnackbar(context, 'Cierra el ojo derecho');
+            }
+            break;
+          case 2:
+            performFaceRecognition(faces);
+            if (!isSnackbarShowing) {
+              // ignore: use_build_context_synchronously
+              showSnackbar(context, 'Analizando rostro...');
+              isSnackbarShowing = true;
+            }
+            break;
+          default:
+        }
+      }
+    } else if (faces.length > 1) {
+      warningSnackbarShowing = true;
+      if (warningSnackbarShowing) {
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        warningSnackbarShowing = false;
+      }
+      isSnackbarShowing = false;
+      stage = 0;
+    } else {
+      isSnackbarShowing = false;
+      stage = 0;
+    }
 
     if (mounted) {
       setState(() {
         _scanResults = faces;
         isBusy = false;
       });
+    }
+  }
+
+  Future<void> testAction(String? name)async{
+    // showSnackbar(context, 'Bienvenido $name');
+    // context.pop();
+    if(context.mounted) {
+      showSnackbar(context, 'Bienvenido $name');
+      context.pushReplacementNamed('face_recognition_screen');
     }
   }
 
@@ -195,15 +233,16 @@ class _RecognitionCameraWidgetState extends State<RecognitionCameraWidget> {
       Rect faceRect = face.boundingBox;
       //TODO crop face
       img.Image croppedFace = img.copyCrop(image!,
-          x: faceRect.left.toInt(),
-          y: faceRect.top.toInt(),
-          width: faceRect.width.toInt(),
-          height: faceRect.height.toInt());
+          x: faceRect.left.toInt() + 1,
+          y: faceRect.top.toInt() + 1,
+          width: faceRect.width.toInt() + 1,
+          height: faceRect.height.toInt() + 1);
 
       //TODO pass cropped face to face recognition model
-      await recognizer.recognize(croppedFace, faceRect, false, null);
+      await recognizer.recognize(croppedFace, faceRect, false, null, testAction);
       // ignore: use_build_context_synchronously
       // context.safePop();
+      // ignore: use_build_context_synchronously
       // showDialog(
       //     context: context,
       //     builder: (context) => AlertDialog(
@@ -218,8 +257,7 @@ class _RecognitionCameraWidgetState extends State<RecognitionCameraWidget> {
       //             ),
       //             TextButton(
       //               child: const Text('Register'),
-      //               onPressed: () async{
-      // await recognizer.recognize(croppedFace, faceRect, true);
+      //               onPressed: () async {
       //                 // ignore: use_build_context_synchronously
       //                 context.pushReplacementNamed('face_recognition_screen');
       //                 // print(croppedFace.data);
@@ -227,8 +265,7 @@ class _RecognitionCameraWidgetState extends State<RecognitionCameraWidget> {
       //               },
       //             ),
       //           ],
-      //         )
-      //     );
+      //         ));
 
       // await showDialog(
       //     context: context,
@@ -267,7 +304,7 @@ class _RecognitionCameraWidgetState extends State<RecognitionCameraWidget> {
     faceDetector = FaceDetector(
       options: FaceDetectorOptions(
         enableClassification: true,
-        performanceMode: FaceDetectorMode.fast,
+        performanceMode: FaceDetectorMode.accurate,
       ),
     );
 

@@ -14,7 +14,6 @@ class Recognizer {
   late InterpreterOptions _interpreterOptions;
   static const int WIDTH = 112;
   static const int HEIGHT = 112;
-  @override
   String get modelName => 'assets/tfmodels/mobile_face_net.tflite';
 
   Recognizer({int? numThreads}) {
@@ -55,10 +54,9 @@ class Recognizer {
     return reshapedArray.reshape([1, 112, 112, 3]);
   }
 
-  Future<void> recognize(img.Image image, Rect location, bool register, String? name) async {
+  Future<void> recognize(img.Image image, Rect location, bool register, String? name, Future<dynamic> Function(String? name)? action) async {
     //TODO crop face from image resize it and convert it to float array
     var input = imageToArray(image);
-    print(input.shape.toString());
 
     //TODO output array
     List output = List.filled(1 * 192, 0).reshape([1, 192]);
@@ -74,16 +72,10 @@ class Recognizer {
               name: name,
               embedding: outputArray.toString(),
             ))
-        : findNearest(outputArray);
-
-    //TODO looks for the nearest embeeding in the database and returns the pair
-    // Pair pair = findNearest(outputArray);
-    // print("distance= ${pair.distance}");
-
-    // return Recognition(pair.name, location, outputArray, pair.distance);
+        : findNearest(outputArray, action);
   }
 
-  findNearest(List<double> emb) async {
+  findNearest(List<double> emb, Future<dynamic> Function(String? name)? action) async {
     Pair pair = Pair("Unknown", -5);
     final usersFaces = FFAppState().usersFaces.toList();
     for (var userFace in usersFaces) {
@@ -96,22 +88,28 @@ class Recognizer {
         distance += diff * diff;
       }
       distance = sqrt(distance);
-      // if (distance < pair.distance) {
-      //   pair.distance = distance;
-      //   pair.name = name;
-      // }
-      if (pair.distance == -5 || distance < pair.distance) {
+      if (distance < 0.7) {
         pair.distance = distance;
         pair.name = name;
+        print('Nombre: ${pair.name}, Distancia: ${pair.distance}');
+        action!(name);
+        return;
+      }else{
+        print('sin coincidencias');
       }
+      // if (pair.distance == -5 || distance < pair.distance) {
+      //   pair.distance = distance;
+      //   pair.name = name;
+      //   print('Nombre: ${pair.name}, Distancia: ${pair.distance}');
+      // }else{
+      //   print('sin coincidencias');
+      // }
     }
-    print('Nombre: ${pair.name}, Distancia: ${pair.distance}');
     // if (pair.distance == double.infinity) {
     //   print("Cara desconocida");
     // } else {
     //   print("Nombre: ${pair.name}, Distancia: ${pair.distance}");
     // }
-    // return pair;
   }
 
   // findNearest(List<double> emb) async{

@@ -107,7 +107,7 @@ class _CameraWidgetState extends State<CameraWidget> {
     return 0xff000000 | ((b << 16) & 0xff0000) | ((g << 8) & 0xff00) | (r & 0xff);
   }
 
-  performFaceRecognition(List<Face> faces) async {
+  Future<void> performFaceRecognition(List<Face> faces) async {
     //TODO convert CameraImage to Image and rotate it so that our frame will be in a portrait
     image = convertYUV420ToImage(frame!);
     image = img.copyRotate(image!, angle: camDirec == CameraLensDirection.front ? 270 : 90);
@@ -467,8 +467,8 @@ class _CameraWidgetState extends State<CameraWidget> {
                         color: Colors.white,
                         size: 30,
                       ),
-                      onPressed: () {
-                        performFaceRecognition(_scanResults);
+                      onPressed: () async{
+                        await performFaceRecognition(_scanResults);
                       },
                     ),
                     FlutterFlowIconButton(
